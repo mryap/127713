@@ -1,0 +1,50 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Source: https://github.com/dgrtwo/gganimate
+install.packages("cowplot")  # a gganimate dependency
+devtools::install_github("dgrtwo/gganimate")
+```
+
+```{r}
+library(gganimate)
+library(gapminder)
+
+p <- ggplot(gapminder, aes(gdpPercap, lifeExp, size = pop, color = continent, frame = year)) +
+  geom_point() +
+  scale_x_log10()
+
+gganimate(p)
+```
+
+
+```{r}
+library(ggplot2)
+library(gapminder)
+library(gganimate)
+
+theme_set(theme_bw())
+g <- ggplot(gapminder, aes(gdpPercap, lifeExp, size=pop, frame=year)) +
+  geom_point() +
+  geom_smooth(aes(group = year), 
+      method="lm",
+      show.legend=FALSE) +
+  facet_wrap(~continent, scales = "free") +
+  scale_x_log10()
+
+gganimate(g, interval=0.2)
+```
+
+```{r}
+install.packages('devtools')
+devtools::install_github('thomasp85/gganimate')
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
